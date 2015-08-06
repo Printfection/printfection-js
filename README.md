@@ -55,7 +55,7 @@ if (order_id.length) {
 } else {
   Printfection.Orders.create({
     campaign_id: campaign_id
-  }, function(error, order) {
+  }, function(order) {
     // Save new PF Order Id to this task
     var task = new sforce.SObject("Task");
     task.id = '{!Task.Id}';
