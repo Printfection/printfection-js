@@ -36,6 +36,48 @@ Next, anywhere in your markup:
 ```
 
 
+## Salesforce Example
+
+```javascript
+{!requireScript("https://api.printfection.com/v2/printfection.js")}
+
+Printfection.configure({
+  api_token: "my-api-token"
+});
+
+var campaign_id = 1;
+var order_id = '{!Task.PF_Order_Id__c}';
+
+if (order_id.length) {
+  Printfection.Orders.retrieve(order_id, function(order) {
+    order.open();
+  });
+} else {
+  Printfection.Orders.create({
+    campaign_id: campaign_id
+  }, function(error, order) {
+    // Save new PF Order Id to this task
+    var task = new sforce.SObject("Task");
+    task.id = '{!Task.Id}';
+    task.PF_Order_Id__c = order.id;
+    sforce.connection.update([task]);
+
+    // Open order in popup window
+    order.open({
+      name:    "{!Contact.Name}",
+      company: "{!Account.Name}",
+      address: "{!Account.BillingStreet}",
+      city:    "{!Account.BillingCity}",
+      state:   "{!Account.BillingState}",
+      zip:     "{!Account.BillingPostalCode}",
+      country: "{!Account.BillingCountryCode}",
+      email:   "{!User.Email}",
+      phone:   "{!Account.Phone}",
+    });
+  });
+}
+```
+
 
 ## License
 
