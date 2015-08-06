@@ -183,7 +183,7 @@
 				callback();
 			}
 		}, 500);
-
+  };
 
   //
   // Initialize
