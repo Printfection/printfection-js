@@ -158,21 +158,31 @@
     }
   };
 
-  Order.prototype.open = function(options) {
+  Order.prototype.open = function(options, callback) {
     options = options || {};
+    callback = callback || function(){};
+
     var queries = [];
-    queries.push('name='    + options['name']);
-    queries.push('company=' + options['company']);
-    queries.push('address=' + options['address']);
-    queries.push('city='    + options['city']);
-    queries.push('state='   + options['state']);
-    queries.push('zip='     + options['zip']);
-    queries.push('country=' + options['country']);
-    queries.push('email='   + options['email']);
-    queries.push('phone='   + options['phone']);
+    options['name'] ? queries.push('name='    + options['name']) : '';
+    options['company'] ? queries.push('company=' + options['company']) : '';
+    options['address'] ? queries.push('address=' + options['address']) : '';
+    options['city'] ? queries.push('city='    + options['city']) : '';
+    options['state'] ? queries.push('state='   + options['state']) : '';
+    options['zip'] ? queries.push('zip='     + options['zip']) : '';
+    options['country'] ? queries.push('country=' + options['country']) : '';
+    options['email'] ? queries.push('email='   + options['email']) : '';
+    options['phone'] ? queries.push('phone='   + options['phone']) : '';
     var url = this.url + "?" + queries.join("&");
-    window.open(url, "_blank", config.popup_settings);
-  };
+    
+    var childWin = window.open(url, "_blank", config.popup_settings);    
+
+		// Wait until the window closes (or changes URLs)
+    var timer = setInterval(function(){
+			if(childWin.closed){
+				clearInterval(timer); 
+				callback();
+			}
+		}, 500);
 
 
   //
