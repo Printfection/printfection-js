@@ -48,9 +48,21 @@ Printfection.configure({
 var campaign_id = 1;
 var order_id = '{!Task.PF_Order_Id__c}';
 
+var address = {
+      name:    "{!Contact.Name}",
+      company: "{!Account.Name}",
+      address: "{!Account.BillingStreet}",
+      city:    "{!Account.BillingCity}",
+      state:   "{!Account.BillingState}",
+      zip:     "{!Account.BillingPostalCode}",
+      country: "{!Account.BillingCountryCode}",
+      email:   "{!User.Email}",
+      phone:   "{!Account.Phone}"
+    };
+
 if (order_id.length) {
   Printfection.Orders.retrieve(order_id, function(order) {
-    order.open();
+    order.open(address);
   });
 } else {
   Printfection.Orders.create({
@@ -63,17 +75,7 @@ if (order_id.length) {
     sforce.connection.update([task]);
 
     // Open order in popup window
-    order.open({
-      name:    "{!Contact.Name}",
-      company: "{!Account.Name}",
-      address: "{!Account.BillingStreet}",
-      city:    "{!Account.BillingCity}",
-      state:   "{!Account.BillingState}",
-      zip:     "{!Account.BillingPostalCode}",
-      country: "{!Account.BillingCountryCode}",
-      email:   "{!Contact.Email}",
-      phone:   "{!Account.Phone}",
-    });
+    order.open(address);
   });
 }
 ```
