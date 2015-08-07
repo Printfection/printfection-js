@@ -174,15 +174,13 @@
     options['phone'] ? queries.push('phone='   + options['phone']) : '';
     var url = this.url + "?" + queries.join("&");
     
-    var childWin = window.open(url, "_blank", config.popup_settings);    
-
-		// Wait until the window closes (or changes URLs)
+    var child_window = window.open(url, "_blank", config.popup_settings);    
     var timer = setInterval(function(){
-			if(childWin.closed){
-				clearInterval(timer); 
-				callback();
-			}
-		}, 500);
+	    if(child_window.closed){
+			  clearInterval(timer); 
+		  	callback();
+	  	}
+  	}, 500);
   };
 
   //
