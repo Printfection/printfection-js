@@ -4,7 +4,7 @@ Implementation of the [Printfection API](http://printfection.github.io/API-Docum
 
 ## WARNING
 
-**This API wrapper is in beta and not all methods have been fully finalized and tested.**
+**This API wrapper is not complete. Not all methods have been finalized and tested.**
 
 ## Usage
 
