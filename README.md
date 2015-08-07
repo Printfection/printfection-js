@@ -2,9 +2,9 @@
 
 Implementation of the [Printfection API](http://printfection.github.io/API-Documentation) for JavaScript.
 
-## WARNING
+## Please Note: This SDK is still in development!
 
-**This API wrapper is not complete. Not all methods have been finalized and tested.**
+**This API wrapper has been tested for specific use cases: 'Import/Collection' and 'Giveaway' campaign integration. However, it is _important_ to note that not all API methods and Printfection campaigns are supported. Examples not presented in this Readme have not been tested.**
 
 ## Usage
 
