@@ -71,7 +71,7 @@ if (order_id.length) {
     // Save new PF Order Id to this task
     var task = new sforce.SObject("Task");
     task.id = '{!Task.Id}';
-    task.PF_Order_Id__c = order.id;
+    task.PF_Order_Id__c = order.code;
     sforce.connection.update([task]);
 
     // Open order in popup window
