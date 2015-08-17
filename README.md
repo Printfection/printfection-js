@@ -56,7 +56,7 @@ var address = {
       state:   "{!Account.BillingState}",
       zip:     "{!Account.BillingPostalCode}",
       country: "{!Account.BillingCountryCode}",
-      email:   "{!User.Email}",
+      email:   "{!Contact.Email}",
       phone:   "{!Account.Phone}"
     };
 
