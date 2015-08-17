@@ -39,6 +39,7 @@ Next, anywhere in your markup:
 ## Salesforce Example
 
 ```javascript
+{!REQUIRESCRIPT("/soap/ajax/19.0/connection.js")}
 {!requireScript("https://api.printfection.com/v2/printfection.js")}
 
 Printfection.configure({
