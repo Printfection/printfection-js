@@ -70,16 +70,16 @@
         event.preventDefault();
         var campaign_id = button.dataset.campaignId;
         var ship_to = {
-          name:     button.dataset.name,
-          company:  button.dataset.company,
-          address:  button.dataset.address,
-          address2: button.dataset.address2,
-          city:     button.dataset.city,
-          state:    button.dataset.state,
-          zip:      button.dataset.zip,
-          country:  button.dataset.country,
-          email:    button.dataset.email,
-          phone:    button.dataset.phone
+          name:      button.dataset.name,
+          company:   button.dataset.company,
+          address:   button.dataset.address,
+          address_2: button.dataset.address_2,
+          city:      button.dataset.city,
+          state:     button.dataset.state,
+          zip:       button.dataset.zip,
+          country:   button.dataset.country,
+          email:     button.dataset.email,
+          phone:     button.dataset.phone
         };
         UI.createAndOpenOrder(campaign_id, ship_to);
       });
@@ -164,16 +164,16 @@
     callback = callback || function(){};
 
     var queries = [];
-    options['name'] ? queries.push('name='    + options['name']) : '';
-    options['company'] ? queries.push('company=' + options['company']) : '';
-    options['address'] ? queries.push('address=' + options['address']) : '';
-    options['address2'] ? queries.push('address_2=' + options['address2']) : '';
-    options['city'] ? queries.push('city='    + options['city']) : '';
-    options['state'] ? queries.push('state='   + options['state']) : '';
-    options['zip'] ? queries.push('zip='     + options['zip']) : '';
-    options['country'] ? queries.push('country=' + options['country']) : '';
-    options['email'] ? queries.push('email='   + options['email']) : '';
-    options['phone'] ? queries.push('phone='   + options['phone']) : '';
+    options['name']       ? queries.push('name='      + options['name']) : '';
+    options['company']    ? queries.push('company='   + options['company']) : '';
+    options['address']    ? queries.push('address='   + options['address']) : '';
+    options['address_2']  ? queries.push('address_2=' + options['address_2']) : '';
+    options['city']       ? queries.push('city='      + options['city']) : '';
+    options['state']      ? queries.push('state='     + options['state']) : '';
+    options['zip']        ? queries.push('zip='       + options['zip']) : '';
+    options['country']    ? queries.push('country='   + options['country']) : '';
+    options['email']      ? queries.push('email='     + options['email']) : '';
+    options['phone']      ? queries.push('phone='     + options['phone']) : '';
     var url = this.url + "?" + queries.join("&");
     
     var child_window = window.open(url, "_blank", config.popup_settings);    
