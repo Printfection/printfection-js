@@ -18,7 +18,6 @@
   };
 
 
-
   //
   // API Service
   //
@@ -164,25 +163,25 @@
     callback = callback || function(){};
 
     var queries = [];
-    options['name']       ? queries.push('name='      + options['name']) : '';
-    options['company']    ? queries.push('company='   + options['company']) : '';
-    options['address']    ? queries.push('address='   + options['address']) : '';
+    options['name']       ? queries.push('name='      + options['name'])      : '';
+    options['company']    ? queries.push('company='   + options['company'])   : '';
+    options['address']    ? queries.push('address='   + options['address'])   : '';
     options['address_2']  ? queries.push('address_2=' + options['address_2']) : '';
-    options['city']       ? queries.push('city='      + options['city']) : '';
-    options['state']      ? queries.push('state='     + options['state']) : '';
-    options['zip']        ? queries.push('zip='       + options['zip']) : '';
-    options['country']    ? queries.push('country='   + options['country']) : '';
-    options['email']      ? queries.push('email='     + options['email']) : '';
-    options['phone']      ? queries.push('phone='     + options['phone']) : '';
+    options['city']       ? queries.push('city='      + options['city'])      : '';
+    options['state']      ? queries.push('state='     + options['state'])     : '';
+    options['zip']        ? queries.push('zip='       + options['zip'])       : '';
+    options['country']    ? queries.push('country='   + options['country'])   : '';
+    options['email']      ? queries.push('email='     + options['email'])     : '';
+    options['phone']      ? queries.push('phone='     + options['phone'])     : '';
     var url = this.url + "?" + queries.join("&");
-    
-    var child_window = window.open(url, "_blank", config.popup_settings);    
+
+    var child_window = window.open(url, "_blank", config.popup_settings);
     var timer = setInterval(function(){
-	    if(child_window.closed){
-			  clearInterval(timer); 
-		  	callback();
-	  	}
-  	}, 500);
+      if (child_window.closed) {
+        clearInterval(timer);
+        callback();
+      }
+    }, 500);
   };
 
   //
