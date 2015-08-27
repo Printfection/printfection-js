@@ -70,15 +70,16 @@
         event.preventDefault();
         var campaign_id = button.dataset.campaignId;
         var ship_to = {
-          name:    button.dataset.name,
-          company: button.dataset.company,
-          address: button.dataset.address,
-          city:    button.dataset.city,
-          state:   button.dataset.state,
-          zip:     button.dataset.zip,
-          country: button.dataset.country,
-          email:   button.dataset.email,
-          phone:   button.dataset.phone
+          name:     button.dataset.name,
+          company:  button.dataset.company,
+          address:  button.dataset.address,
+          address2: button.dataset.address2,
+          city:     button.dataset.city,
+          state:    button.dataset.state,
+          zip:      button.dataset.zip,
+          country:  button.dataset.country,
+          email:    button.dataset.email,
+          phone:    button.dataset.phone
         };
         UI.createAndOpenOrder(campaign_id, ship_to);
       });
@@ -166,6 +167,7 @@
     options['name'] ? queries.push('name='    + options['name']) : '';
     options['company'] ? queries.push('company=' + options['company']) : '';
     options['address'] ? queries.push('address=' + options['address']) : '';
+    options['address2'] ? queries.push('address_2=' + options['address2']) : '';
     options['city'] ? queries.push('city='    + options['city']) : '';
     options['state'] ? queries.push('state='   + options['state']) : '';
     options['zip'] ? queries.push('zip='     + options['zip']) : '';
