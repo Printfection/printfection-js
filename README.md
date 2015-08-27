@@ -13,7 +13,7 @@ First, include Printfection.js on the page and configure your API token. This ca
 ```html
 <script type="text/javascript" src="https://api.printfection.com/v2/printfection.js"></script>
 <script type="text/javascript">
-  Printfection.configure({ api_token: "my-api-token" });
+  Printfection.configure({ api_token: "YOUR-API-TOKEN" });
 </script>
 ```
 
@@ -21,18 +21,18 @@ Next, anywhere in your markup:
 
 ```html
 <a class="pf-order-button"
-  data-campaign-id="1"
+  data-campaign-id="123456"
   data-name="Joseph Schmo"
   data-address="123 Main Street"
-  data-address2="Suite 101"
+  data-address_2="Suite 201"
   data-company="ACME Inc."
   data-city="Denver"
   data-state="Colorado"
   data-zip="80202"
   data-country="United States"
   data-email="joseph.schmo@example.com"
-  data-phone="751-166-2910"
->Open Order</a>
+  data-phone="555-166-2910"
+>Order Swag</a>
 ```
 
 
@@ -46,7 +46,7 @@ Printfection.configure({
   api_token: "my-api-token"
 });
 
-var campaign_id = 1;
+var campaign_id = 123456;
 var order_id = '{!Task.PF_Order_Id__c}';
 
 var address = {
