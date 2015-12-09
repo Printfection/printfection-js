@@ -55,7 +55,7 @@ var address = {
       address: "{!Account.BillingStreet}",
       city:    "{!Account.BillingCity}",
       state:   "{!Account.BillingState}",
-      zip:     "{!Account.BillingPostalCode}",
+      zipcode: "{!Account.BillingPostalCode}",
       country: "{!Account.BillingCountryCode}",
       email:   "{!Contact.Email}",
       phone:   "{!Account.Phone}"
