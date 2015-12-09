@@ -75,7 +75,7 @@
           address_2: button.dataset.address_2,
           city:      button.dataset.city,
           state:     button.dataset.state,
-          zip:       button.dataset.zip,
+          zipcode:   button.dataset.zipcode,
           country:   button.dataset.country,
           email:     button.dataset.email,
           phone:     button.dataset.phone
@@ -169,7 +169,7 @@
     options['address_2']  ? queries.push('address_2=' + options['address_2']) : '';
     options['city']       ? queries.push('city='      + options['city'])      : '';
     options['state']      ? queries.push('state='     + options['state'])     : '';
-    options['zip']        ? queries.push('zip='       + options['zip'])       : '';
+    options['zipcode']    ? queries.push('zipcode='   + options['zipcode'])   : '';
     options['country']    ? queries.push('country='   + options['country'])   : '';
     options['email']      ? queries.push('email='     + options['email'])     : '';
     options['phone']      ? queries.push('phone='     + options['phone'])     : '';
