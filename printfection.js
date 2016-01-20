@@ -18,6 +18,7 @@
   };
 
 
+
   //
   // API Service
   //
@@ -30,13 +31,17 @@
       request.open(type.toUpperCase(), url, true);
       request.setRequestHeader("Authorization","Basic " + auth);
       request.setRequestHeader("Content-type", "application/json");
-      request.onreadystatechange = function () {;
-        if (request.readyState == 4 && request.status == 200) {
+      request.onreadystatechange = function () {
+        if (request.readyState != 4) return;
+        if (request.status != 200) {
+          var error = JSON.parse(request.responseText);
+          callback(error, null);
+        } else {
           var response = JSON.parse(request.responseText);
           if (response.object == "list" && response.data) {
-            callback(response.data);
+            callback(null, response.data);
           } else {
-            callback(response);
+            callback(null, response);
           }
         }
       }
@@ -100,9 +105,10 @@
   PF.Campaigns = {
     retrieve: function(id, callback) {
       callback = callback || function(){};
-      API.get("/campaigns/" + id, function(response) {;
-        var order = new Campaign(response);
-        callback(order);
+      API.get("/campaigns/" + id, function(error, data) {
+        if (error) return callback(error, null);
+        var campaign = new Campaign(data);
+        callback(null, campaign);
       });
     }
   };
@@ -124,26 +130,29 @@
   PF.Orders = {
     all: function(callback) {
       callback = callback || function(){};
-      API.get("/orders", function(response) {
+      API.get("/orders", function(error, data) {
+        if (error) return callback(error, null);
         var orders = [];
-        for (i = 0; i < response.length; i += 1) {
-          orders.push(new Order(response[i]));
+        for (i = 0; i < data.length; i += 1) {
+          orders.push(new Order(data[i]));
         }
-        callback(orders);
+        callback(null, orders);
       });
     },
     retrieve: function(id, callback) {
       callback = callback || function(){};
-      API.get("/orders/" + id, function(response) {
-        var order = new Order(response);
-        callback(order);
+      API.get("/orders/" + id, function(error, data) {
+        if (error) return callback(error, null);
+        var order = new Order(data);
+        callback(null, order);
       });
     },
     create: function(properties, callback) {
       callback = callback || function(){};
-      API.post("/orders", properties, function(response) {
-        var order = new Order(response);
-        callback(order);
+      API.post("/orders", properties, function(error, data) {
+        if (error) return callback(error, null);
+        var order = new Order(data);
+        callback(null, order);
       });
     }
   };
