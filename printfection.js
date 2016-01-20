@@ -18,6 +18,31 @@
   };
 
 
+  //
+  // Backward compatibility
+  //
+  // If callback arity is 1, the client is not expecting
+  // the callback arguments in the form of (error, ...).
+  // As a result, they won't be configured to handle an error,
+  // so we will fail when arity is 1.
+  // The length property specifies the number
+  // of arguments expected by the function.
+  PF.handle_success_callback = function(callback, data) {
+    if (callback.length == 1) {
+      callback(data);
+    } else {
+      callback(null, data);
+    }
+  }
+
+  PF.handle_error_callback = function(callback, error) {
+    if (callback.length == 1) {
+      return; // Do nothing. Fail silently for backward compatibility.
+    } else {
+      callback(error, null);
+    }
+  }
+
 
   //
   // API Service
@@ -106,9 +131,12 @@
     retrieve: function(id, callback) {
       callback = callback || function(){};
       API.get("/campaigns/" + id, function(error, data) {
-        if (error) return callback(error, null);
-        var campaign = new Campaign(data);
-        callback(null, campaign);
+        if (error) {
+          PF.handle_error_callback(callback, error);
+        } else {
+          var campaign = new Campaign(data);
+          PF.handle_success_callback(callback, campaign);
+        }
       });
     }
   };
@@ -131,28 +159,37 @@
     all: function(callback) {
       callback = callback || function(){};
       API.get("/orders", function(error, data) {
-        if (error) return callback(error, null);
-        var orders = [];
-        for (i = 0; i < data.length; i += 1) {
-          orders.push(new Order(data[i]));
+        if (error) {
+          PF.handle_error_callback(callback, error);
+        } else {
+          var orders = [];
+          for (i = 0; i < data.length; i += 1) {
+            orders.push(new Order(data[i]));
+          }
+          PF.handle_success_callback(callback, orders);
         }
-        callback(null, orders);
       });
     },
     retrieve: function(id, callback) {
       callback = callback || function(){};
       API.get("/orders/" + id, function(error, data) {
-        if (error) return callback(error, null);
-        var order = new Order(data);
-        callback(null, order);
+        if (error) {
+          PF.handle_error_callback(callback, error)
+        } else {
+          var order = new Order(data);
+          PF.handle_success_callback(callback, order);
+        }
       });
     },
     create: function(properties, callback) {
       callback = callback || function(){};
       API.post("/orders", properties, function(error, data) {
-        if (error) return callback(error, null);
-        var order = new Order(data);
-        callback(null, order);
+        if (error) {
+          PF.handle_error_callback(callback, error);
+        } else {
+          var order = new Order(data);
+          PF.handle_success_callback(callback, order);
+        }
       });
     }
   };
