@@ -50,25 +50,34 @@ var campaign_id = 123456;
 var order_id = '{!Task.PF_Order_Id__c}';
 
 var address = {
-      name:    "{!Contact.Name}",
-      company: "{!Account.Name}",
-      address: "{!Account.BillingStreet}",
-      city:    "{!Account.BillingCity}",
-      state:   "{!Account.BillingState}",
-      zipcode: "{!Account.BillingPostalCode}",
-      country: "{!Account.BillingCountryCode}",
-      email:   "{!Contact.Email}",
-      phone:   "{!Account.Phone}"
-    };
+  name:    "{!Contact.Name}",
+  company: "{!Account.Name}",
+  address: "{!Account.BillingStreet}",
+  city:    "{!Account.BillingCity}",
+  state:   "{!Account.BillingState}",
+  zipcode: "{!Account.BillingPostalCode}",
+  country: "{!Account.BillingCountryCode}",
+  email:   "{!Contact.Email}",
+  phone:   "{!Account.Phone}"
+};
 
 if (order_id.length) {
-  Printfection.Orders.retrieve(order_id, function(order) {
+  Printfection.Orders.retrieve(order_id, function(error, order) {
+    if (error) {
+      alert(error.message);
+      return;
+    }
     order.open(address);
   });
 } else {
   Printfection.Orders.create({
     campaign_id: campaign_id
-  }, function(order) {
+  }, function(error, order) {
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
     // Save new PF Order Id to this task
     var task = new sforce.SObject("Task");
     task.id = '{!Task.Id}';
