@@ -62,22 +62,19 @@ var address = {
 };
 
 if (order_id.length) {
-  Printfection.Orders.retrieve(order_id, function(error, order) {
-    if (error) {
-      alert(error.message);
-      return;
-    }
-    order.open(address);
-  });
+  retrieveAndOpenOrder(order_id, true);
 } else {
+  createAndOpenOrder();
+}
+
+function createAndOpenOrder(){
   Printfection.Orders.create({
     campaign_id: campaign_id
   }, function(error, order) {
-    if (error) {
+    if(error){
       alert(error.message);
       return;
-    }
-
+    }    
     // Save new PF Order Id to this task
     var task = new sforce.SObject("Task");
     task.id = '{!Task.Id}';
@@ -88,6 +85,30 @@ if (order_id.length) {
     order.open(address);
   });
 }
+
+function retrieveAndOpenOrder(order_id, create_new){
+  order_id = order_id ? order_id : 0;
+  create_new = create_new ? true : false;
+
+  if(order_id == 0){
+    return false;
+  }
+
+  Printfection.Orders.retrieve(order_id, function(error, order) {
+  
+    if(error){
+      alert(error.message);
+      return;
+    }
+    
+    if(order && order.status != 'cancelled'){
+      order.open(address);
+    }else if(create_new){
+      createAndOpenOrder();
+    }
+  });
+}
+
 ```
 
 
