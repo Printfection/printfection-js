@@ -51,8 +51,8 @@ var order_id = '{!Task.PF_Order_Id__c}';
 
 var address = {
   name:    "{!Contact.Name}",
-  company: "{!Account.Name}",
-  address: "{!Account.BillingStreet}",
+  company: "{!URLENCODE(Account.Name)}",
+  address: "{!URLENCODE(Account.BillingStreet)}",
   city:    "{!Account.BillingCity}",
   state:   "{!Account.BillingState}",
   zipcode: "{!Account.BillingPostalCode}",
