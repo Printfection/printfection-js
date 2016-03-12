@@ -128,6 +128,19 @@
   // Campaigns Service
   //
   PF.Campaigns = {
+    all: function(callback) {
+      callback = callback || function(){};
+      API.get("/campaigns", function(error, data) {
+        if (error) {
+          PF.handle_error_callback(callback, error);
+        } else {
+          var campaigns = data.map(function(d) {
+            return new Campaign(data);
+          });
+          PF.handle_success_callback(callback, campaigns);
+        }
+      });
+    },
     retrieve: function(id, callback) {
       callback = callback || function(){};
       API.get("/campaigns/" + id, function(error, data) {
