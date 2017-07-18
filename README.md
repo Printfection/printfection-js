@@ -53,9 +53,9 @@ var address = {
   name:    "{!Contact.Name}",
   company: "{!URLENCODE(Account.Name)}",
   address: "{!URLENCODE(Account.BillingStreet)}",
-  city:    "{!Account.BillingCity}",
-  state:   "{!Account.BillingState}",
-  zipcode: "{!Account.BillingPostalCode}",
+  city:    "{!URLENCODE(Account.BillingCity)}",
+  state:   "{!URLENCODE(Account.BillingState)}",
+  zipcode: "{!URLENCODE(Account.BillingPostalCode)}",
   country: "{!Account.BillingCountryCode}",
   email:   "{!Contact.Email}",
   phone:   "{!Account.Phone}"
