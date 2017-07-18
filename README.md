@@ -118,7 +118,7 @@ function retrieveAndOpenOrder(order_id, create_new){
 
 ## Issues & Support
 
-[casey.ohara@printfection.com](mailto:casey.ohara@printfection.com)
+[support@printfection.com](mailto:support@printfection.com)
 
 ## Contributing
 
