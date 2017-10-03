@@ -50,7 +50,7 @@ var campaign_id = 123456;
 var order_id = '{!Task.PF_Order_Id__c}';
 
 var address = {
-  name:    "{!Contact.Name}",
+  name:    "{!URLENCODE(Contact.Name)}",
   company: "{!URLENCODE(Account.Name)}",
   address: "{!URLENCODE(Account.BillingStreet)}",
   city:    "{!URLENCODE(Account.BillingCity)}",
